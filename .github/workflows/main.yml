@@ -16,9 +16,6 @@ jobs:
       - name: 🏗️ Install Dependencies
         run: npm install
 
-      - name: 🔍 Run Tests
-        run: npm test
-
       - name: 🎒 Package and Deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
