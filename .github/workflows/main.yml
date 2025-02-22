@@ -1,0 +1,29 @@
+name: Deploy Backend to AWS Lambda
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️ Checkout Code
+        uses: actions/checkout@v3
+
+      - name: 🏗️ Install Dependencies
+        run: npm install
+
+      - name: 🔍 Run Tests
+        run: npm test
+
+      - name: 🎒 Package and Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "us-east-1"
+        run: |
+          zip -r aglet-backend.zip .
+          aws lambda update-function-code --function-name aglet-backend-dev-app --zip-file fileb://aglet-backend.zip
