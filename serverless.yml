@@ -1,27 +1,20 @@
-service: my-serverless-backend
+service: aglet-backend
 
 provider:
   name: aws
-  runtime: nodejs18.x
-  region: us-east-1
-  environment:
-    MONGO_URI: "mongodb+srv://alendennis77:Alendennis1@ecommerceapp.mzltawp.mongodb.net/?retryWrites=true&w=majority&appName=shoetopia"
+  runtime: nodejs14.x
+  region: us-east-1  # Change to your preferred AWS region
 
 functions:
-  api:
-    handler: server.handler
+  app:
+    handler: serverless-http
     events:
       - http:
-          path: "{proxy+}"
+          path: /{proxy+}
           method: any
-          cors:
-            origins:
-              - "*"
-            headers:
-              - Content-Type
-              - Authorization
-            allowCredentials: false
-
+      - http:
+          path: /webhooks
+          method: post
 
 plugins:
   - serverless-offline
