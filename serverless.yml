@@ -2,8 +2,8 @@ service: aglet-backend
 
 provider:
   name: aws
-  runtime: nodejs14.x
-  region: us-east-1  # Change to your preferred AWS region
+ runtime: nodejs16.x
+ region: us-east-1  # Change to your preferred AWS region
 
 functions:
   app:
