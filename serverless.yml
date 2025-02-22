@@ -4,14 +4,24 @@ provider:
   name: aws
   runtime: nodejs16.x
   region: us-east-1  # Change to your preferred AWS region
+  stage: dev
+  environment:
+    MONGO_URI: "mongodb+srv://alendennis77:Alendennis1@ecommerceapp.mzltawp.mongodb.net/?retryWrites=true&w=majority&appName=shoetopia"
 
 functions:
   app:
-    handler: serverless-http
+    handler: server.handler
+    timeout: 29
     events:
       - http:
           path: /{proxy+}
           method: any
+          cors:
+            origin: "http://localhost:3000"  # Allow only localhost:3000 to access
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
       - http:
           path: /webhooks
           method: post

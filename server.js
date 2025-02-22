@@ -48,7 +48,7 @@ app.use('/', (req, res) => {
 
 
 // connect to db
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, serverSelectionTimeoutMS: 30000, socketTimeoutMS: 45000, family: 4 })
   .then(() => {
     console.log('connected to database')
     // listen to port
@@ -60,4 +60,4 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
     console.log(err)
   }) 
 
-  module.exports.handler = serverless(app);
+module.exports.handler = serverless(app);
