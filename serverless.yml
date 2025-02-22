@@ -1,0 +1,27 @@
+service: my-serverless-backend
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment:
+    MONGO_URI: "mongodb+srv://alendennis77:Alendennis1@ecommerceapp.mzltawp.mongodb.net/?retryWrites=true&w=majority&appName=shoetopia"
+
+functions:
+  api:
+    handler: server.handler
+    events:
+      - http:
+          path: "{proxy+}"
+          method: any
+          cors:
+            origins:
+              - "*"
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: false
+
+
+plugins:
+  - serverless-offline
