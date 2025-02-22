@@ -39,7 +39,7 @@ app.use('/api/user', userRoutes)
 app.use('/api/cart', cartRoutes)
 app.use('/api/order', orderRoutes)
 app.get("/api/hello", (req, res) => {
-  res.json({ message: "Hello from serverless backend!" });
+  res.json({ message: "Hello from serverless backend with cicd!" });
 });
 app.use('/', (req, res) => {
   res.send('server is running')
